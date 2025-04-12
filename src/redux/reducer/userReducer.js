@@ -1,18 +1,17 @@
-import { localUserService } from "../../service/localService"
-import { USER_LOGIN } from "../contant/useContant"
+import { USER_LOGIN } from "../contant/useContant";
+import { localUserService } from "../../service/localService";
 
 const initialState = {
-    userInfo: localUserService.get(),
+    userInfo: localUserService.get() || {},  // Đảm bảo không null nếu không có thông tin
 };
 
-let userReducer = (state = initialState, {type, payload}) =>{
+const userReducer = (state = initialState, { type, payload }) => {
     switch (type) {
-        case USER_LOGIN: {
-            return{...state, userInfo: payload};
-        }
+        case USER_LOGIN:
+            return { ...state, userInfo: payload };
         default:
             return state;
     }
-}
+};
 
-export default userReducer
+export default userReducer;
